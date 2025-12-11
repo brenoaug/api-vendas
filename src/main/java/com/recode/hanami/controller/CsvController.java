@@ -1,9 +1,11 @@
 package com.recode.hanami.controller;
 
 import com.recode.hanami.service.CsvService;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 import java.util.List;
@@ -13,8 +15,11 @@ import java.util.Map;
 @RequestMapping("/api/csv")
 public class CsvController {
 
-    @Autowired
-    private CsvService csvService;
+    private final CsvService csvService;
+
+    public CsvController(CsvService csvService) {
+        this.csvService = csvService;
+    }
 
     @PostMapping("/upload")
     public List<Map<String, String>> uploadCsv(@RequestParam("file") MultipartFile file) throws IOException {
