@@ -1,5 +1,6 @@
 package com.recode.hanami.controller;
 
+import com.recode.hanami.dto.DadosArquivoDTO;
 import com.recode.hanami.service.CsvService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +23,7 @@ public class CsvController {
     }
 
     @PostMapping("/upload")
-    public List<Map<String, String>> uploadCsv(@RequestParam("file") MultipartFile file) throws IOException {
-        return csvService.convertCsvToJson(file.getInputStream());
+    public List<DadosArquivoDTO> uploadCsv(@RequestParam("file") MultipartFile file) throws IOException {
+        return csvService.conversorCsvParaJson(file.getInputStream());
     }
 }
