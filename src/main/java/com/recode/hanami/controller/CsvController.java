@@ -3,6 +3,7 @@ package com.recode.hanami.controller;
 import com.recode.hanami.dto.DadosArquivoDTO;
 import com.recode.hanami.dto.ImportacaoResponseDTO;
 import com.recode.hanami.exceptions.ArquivoInvalidoException;
+import com.recode.hanami.exceptions.DadosInvalidosException;
 import com.recode.hanami.service.CsvService;
 import com.recode.hanami.service.ProcessamentoVendasService;
 import org.springframework.http.HttpStatus;
@@ -41,15 +42,16 @@ public class CsvController {
 
         try {
             List<DadosArquivoDTO> listaProcessada = csvService.conversorCsvParaJson(file);
-
             processamentoVendasService.salvarDadosDoArquivo(listaProcessada);
 
             ImportacaoResponseDTO resposta = new ImportacaoResponseDTO("sucesso", listaProcessada.size());
-            return ResponseEntity.ok(resposta);
-
-        } catch (ArquivoInvalidoException e) {
             return ResponseEntity
-                    .status(HttpStatus.UNPROCESSABLE_ENTITY)
+                    .ok()
+                    .body(resposta);
+
+        } catch (ArquivoInvalidoException | DadosInvalidosException e) {
+            return ResponseEntity
+                    .unprocessableContent()
                     .body(Map.of(
                             "status", "erro_processamento",
                             "mensagem", e.getMessage()
@@ -57,7 +59,7 @@ public class CsvController {
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity
-                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .internalServerError()
                     .body(Map.of(
                             "status", "erro_interno",
                             "mensagem", "Ocorreu um erro inesperado: " + e.getMessage()
