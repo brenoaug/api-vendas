@@ -68,7 +68,7 @@ public class CsvController {
             logger.error("Erro de dados inválidos: {}", e.getMessage());
 
             return ResponseEntity
-                    .unprocessableContent()
+                    .unprocessableEntity()
                     .body(Map.of(
                             "status", "erro_processamento",
                             "mensagem", e.getMessage()
