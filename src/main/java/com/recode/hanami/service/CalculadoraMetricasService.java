@@ -83,4 +83,24 @@ public class CalculadoraMetricasService {
         bd = bd.setScale(2, RoundingMode.HALF_UP);
         return bd.doubleValue();
     }
+
+    public Double calcularCustoTotalGeral(List<Venda> vendas) {
+        if (vendas == null || vendas.isEmpty()) return 0.0;
+
+        double somaCustos = vendas.stream()
+                .mapToDouble(this::calcularCustoTotalVenda) // Reusa a lógica unitária
+                .sum();
+
+        return arredondar(somaCustos);
+    }
+
+    public Double calcularLucroBrutoGeral(List<Venda> vendas) {
+        if (vendas == null || vendas.isEmpty()) return 0.0;
+
+        double somaLucros = vendas.stream()
+                .mapToDouble(this::calcularLucroBruto) // Reusa a lógica unitária
+                .sum();
+
+        return arredondar(somaLucros);
+    }
 }

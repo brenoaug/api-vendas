@@ -55,20 +55,18 @@ public class ProcessamentoVendasService {
     private Cliente converterParaCliente(DadosArquivoDTO dto) {
         Cliente c = new Cliente();
 
-        if (dto.getClienteId() == null || dto.getClienteId().trim().isEmpty()) {
-            throw new DadosInvalidosException
-                    ("ID do cliente não pode ser nulo ou vazio");
+        if (dto.clienteId() == null || dto.clienteId().trim().isEmpty()) {
+            throw new DadosInvalidosException("ID do cliente não pode ser nulo ou vazio");
         }
 
-        c.setId(dto.getClienteId());
-        c.setNomeCliente(dto.getNomeCliente());
-        c.setIdadeCliente(dto.getIdadeCliente());
-        c.setGeneroCliente(dto.getGeneroCliente());
-        c.setCidadeCliente(dto.getCidadeCliente());
-        c.setEstadoCliente(dto.getEstadoCliente());
+        c.setId(dto.clienteId());
+        c.setNomeCliente(dto.nomeCliente());
+        c.setIdadeCliente(dto.idadeCliente());
+        c.setGeneroCliente(dto.generoCliente());
+        c.setCidadeCliente(dto.cidadeCliente());
+        c.setEstadoCliente(dto.estadoCliente());
 
-        // Passagem direta (sem conversão)
-        c.setRendaEstimada(dto.getRendaEstimada());
+        c.setRendaEstimada(dto.rendaEstimada());
 
         return c;
     }
@@ -76,17 +74,16 @@ public class ProcessamentoVendasService {
     private Produto converterParaProduto(DadosArquivoDTO dto) {
         Produto p = new Produto();
 
-        if (dto.getProdutoId() == null || dto.getProdutoId().trim().isEmpty()) {
-            throw new DadosInvalidosException
-                    ("ID do produto não pode ser nulo ou vazio");
+        if (dto.produtoId() == null || dto.produtoId().trim().isEmpty()) {
+            throw new DadosInvalidosException("ID do produto não pode ser nulo ou vazio");
         }
 
-        p.setId(dto.getProdutoId());
-        p.setNomeProduto(dto.getNomeProduto());
-        p.setCategoria(dto.getCategoria());
-        p.setMarca(dto.getMarca());
-        p.setMargemLucro(dto.getMargemLucro());
-        p.setPrecoUnitario(dto.getPrecoUnitario());
+        p.setId(dto.produtoId());
+        p.setNomeProduto(dto.nomeProduto());
+        p.setCategoria(dto.categoria());
+        p.setMarca(dto.marca());
+        p.setMargemLucro(dto.margemLucro());
+        p.setPrecoUnitario(dto.precoUnitario());
 
         return p;
     }
@@ -94,37 +91,35 @@ public class ProcessamentoVendasService {
     private Vendedor converterParaVendedor(DadosArquivoDTO dto) {
         Vendedor v = new Vendedor();
 
-        if (dto.getVendedorId() == null || dto.getVendedorId().trim().isEmpty()) {
-            throw new DadosInvalidosException
-                    ("ID do vendedor não pode ser nulo ou vazio");
+        if (dto.vendedorId() == null || dto.vendedorId().trim().isEmpty()) {
+            throw new DadosInvalidosException("ID do vendedor não pode ser nulo ou vazio");
         }
 
-        v.setId(dto.getVendedorId());
+        v.setId(dto.vendedorId());
         return v;
     }
 
     private Venda converterParaVenda(DadosArquivoDTO dto, Cliente cliente, Produto produto, Vendedor vendedor) {
         Venda v = new Venda();
 
-        if (dto.getIdTransacao() == null || dto.getIdTransacao().trim().isEmpty()) {
-            throw new DadosInvalidosException
-                    ("ID da transação não pode ser nulo ou vazio");
+        if (dto.idTransacao() == null || dto.idTransacao().trim().isEmpty()) {
+            throw new DadosInvalidosException("ID da transação não pode ser nulo ou vazio");
         }
 
-        v.setId(dto.getIdTransacao());
-        v.setDataVenda(dto.getDataVenda());
+        v.setId(dto.idTransacao());
+        v.setDataVenda(dto.dataVenda());
 
-        v.setValorFinal(dto.getValorFinal());
-        v.setSubtotal(dto.getSubtotal());
+        v.setValorFinal(dto.valorFinal());
+        v.setSubtotal(dto.subtotal());
 
-        v.setDescontoPercent(dto.getDescontoPercent());
-        v.setQuantidade(dto.getQuantidade());
-        v.setCanalVenda(dto.getCanalVenda());
-        v.setFormaPagamento(dto.getFormaPagamento());
+        v.setDescontoPercent(dto.descontoPercent());
+        v.setQuantidade(dto.quantidade());
+        v.setCanalVenda(dto.canalVenda());
+        v.setFormaPagamento(dto.formaPagamento());
 
-        v.setRegiao(dto.getRegiao());
-        v.setStatusEntrega(dto.getStatusEntrega());
-        v.setTempoEntregaDias(dto.getTempoEntregaDias());
+        v.setRegiao(dto.regiao());
+        v.setStatusEntrega(dto.statusEntrega());
+        v.setTempoEntregaDias(dto.tempoEntregaDias());
 
         if (cliente == null || produto == null || vendedor == null) {
             throw new IllegalArgumentException("Cliente, Produto e Vendedor não podem ser nulos");
