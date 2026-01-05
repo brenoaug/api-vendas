@@ -95,41 +95,4 @@ public class CsvController {
                     ));
         }
     }
-
-
-//    @GetMapping("/produtos")
-//    public ResponseEntity<List<Produto>> listarProdutos(
-//            @RequestParam(name = "sort_by", required = false) String sortBy) {
-//
-//        if (sortBy == null) {
-//            return ResponseEntity.ok(produtoRepository.findAll());
-//        }
-//
-//        String campoParaOrdenar;
-//        Sort.Direction direcao = Sort.Direction.ASC;
-//
-//        switch (sortBy) {
-//            case "quantidade":
-//                campoParaOrdenar = "quantidade";
-//                direcao = Sort.Direction.DESC;
-//                break;
-//            case "preco":
-//                campoParaOrdenar = "precoUnitario";
-//                direcao = Sort.Direction.DESC;
-//                break;
-//            case "nome":
-//                campoParaOrdenar = "nomeProduto";
-//                break;
-//            case "margem":
-//                campoParaOrdenar = "margemLucro";
-//                direcao = Sort.Direction.DESC;
-//                break;
-//            default:
-//                campoParaOrdenar = "nomeProduto";
-//        }
-//
-//        Sort ordenacao = Sort.by(direcao, campoParaOrdenar);
-//
-//        return ResponseEntity.ok(produtoRepository.findAll(ordenacao));
-//    }
 }
