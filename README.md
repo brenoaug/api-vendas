@@ -14,12 +14,6 @@ O nome "Hanami" (花見) significa "observar as flores" em japonês, representan
 
 Empresas e profissionais frequentemente precisam analisar grandes volumes de dados de vendas armazenados em planilhas CSV. O processo manual de importação, validação e cálculo de métricas é trabalhoso, propenso a erros e demorado.
 
-O **Projeto Hanami** resolve esse problema ao oferecer uma solução automatizada que:
-- Processa e valida arquivos CSV de forma rápida e confiável
-- Calcula automaticamente métricas financeiras complexas
-- Gera relatórios analíticos personalizados
-- Persiste os dados de forma estruturada em banco de dados
-
 ## Funcionalidades Principais
 
 ### Upload e Processamento de CSV
