@@ -14,19 +14,32 @@ O nome "Hanami" (花見) significa "observar as flores" em japonês, representan
 
 Empresas e profissionais frequentemente precisam analisar grandes volumes de dados de vendas armazenados em planilhas CSV. O processo manual de importação, validação e cálculo de métricas é trabalhoso, propenso a erros e demorado.
 
-## Arquitetura e Tecnologias Utilizadas
+## Funcionalidades Principais
 
-### Backend (API RESTful)
+### Upload e Processamento de CSV
+- Recebe arquivos CSV contendo dados de vendas, clientes, produtos e vendedores
+- Valida automaticamente a estrutura e integridade dos dados
+- Converte e persiste as informações no banco de dados H2
 
-* **Linguagem:** Java 22
-* **Framework:** Spring Boot 3.4.4
-* **Ferramenta de Build:** Maven
-* **Banco de Dados:** H2 Database (em memória)
-* **Persistência:** Spring Data JPA / Hibernate
-* **Processamento CSV:** Jackson Dataformat CSV
-* **Documentação:** SpringDoc OpenAPI (Swagger)
+### Cálculos Financeiros Automatizados
+- **Receita Líquida:** Cálculo do faturamento total das vendas
+- **Custo Total:** Estimativa dos custos baseada em margens de lucro
+- **Lucro Bruto:** Diferença entre receita e custos
+- **Margens de Lucro:** Cálculo percentual de rentabilidade
 
-### Arquitetura em Camadas
+### Relatórios Analíticos
+- Análise detalhada por produto com múltiplos critérios de ordenação
+- Métricas financeiras consolidadas
+- Exportação de dados estruturados em JSON
+
+### Validação e Tratamento de Erros
+- Validação de layout de arquivo
+- Tratamento de dados inconsistentes
+- Mensagens de erro descritivas e personalizadas
+
+## Organização de Pastas e Tecnologias Utilizadas
+
+A aplicação está organizada em pastas que refletem as responsabilidades de cada parte do sistema:
 
 ```
 com.recode.hanami
@@ -62,6 +75,16 @@ com.recode.hanami
 └── util/               # Classes utilitárias
     └── TratamentoDadosUtil.java
 ```
+
+Principais tecnologias utilizadas:
+- **Java 22**
+- **Spring Boot 3.4.4**
+- **Maven**
+- **H2 Database (memória)**
+- **Spring Data JPA / Hibernate**
+- **Jackson Dataformat CSV**
+- **SpringDoc OpenAPI (Swagger)**
+- **SLF4J / Logback**
 
 ## Pré-requisitos
 
@@ -232,7 +255,7 @@ A API possui documentação interativa gerada automaticamente pelo **SpringDoc O
 ```json
 {
   "status": "sucesso",
-  "linha_processadas": 10000
+  "registrosProcessados": 10000
 }
 ```
 
