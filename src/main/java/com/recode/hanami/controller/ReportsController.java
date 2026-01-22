@@ -22,11 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Controller responsável pelos endpoints de relatórios e análises.
- * Implementa apenas orquestração - toda lógica de negócio está nos Services.
- * Exceções são tratadas pelo GlobalExceptionHandler.
- */
 @RestController
 @RequestMapping("hanami/reports")
 public class ReportsController implements ReportsControllerOpenApi {
@@ -102,21 +97,14 @@ public class ReportsController implements ReportsControllerOpenApi {
     @Override
     public ResponseEntity<byte[]> downloadRelatorio(@RequestParam(value = "format") String format) {
         logger.info("Download de relatório solicitado: formato={}", format);
-
-        // Validar formato (lança exceção se inválido)
         formatoRelatorioValidator.validate(format);
-
-        // Gerar relatório completo
         RelatorioCompletoDTO relatorio = relatorioService.gerarRelatorioCompleto();
 
-        // Gerar arquivo conforme formato
         byte[] conteudo = format.equalsIgnoreCase("json")
             ? relatorioService.gerarRelatorioJsonBytes(relatorio)
             : relatorioService.gerarRelatorioPdfBytes(relatorio);
 
         logger.info("Relatório {} gerado com sucesso - {} bytes", format.toUpperCase(), conteudo.length);
-
-        // Retornar resposta de download configurada
         return DownloadArquivoUtil.buildDownloadResponse(conteudo, format);
     }
 }

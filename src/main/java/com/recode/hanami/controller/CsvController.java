@@ -18,11 +18,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
-/**
- * Controller responsável pelo upload e processamento de arquivos CSV.
- * Implementa apenas o fluxo feliz (Happy Path).
- * Exceções são tratadas pelo GlobalExceptionHandler.
- */
 @RestController
 @RequestMapping("/hanami")
 public class CsvController implements CsvControllerOpenApi {
@@ -45,19 +40,14 @@ public class CsvController implements CsvControllerOpenApi {
     @Override
     public ResponseEntity<ImportacaoResponseDTO> uploadCsv(@RequestParam(value = "file") MultipartFile file) {
         logger.info("Iniciando processamento de upload de arquivo: {}", file.getOriginalFilename());
-
-        // Validar arquivo (lança exceção se inválido)
         uploadArquivoValidator.validate(file);
 
-        // Converter CSV para JSON
         List<DadosArquivoDTO> listaProcessada = csvService.conversorCsvParaJson(file);
         logger.debug("Arquivo convertido com sucesso. Registros: {}", listaProcessada.size());
 
-        // Salvar dados no banco
         processamentoVendasService.salvarDadosDoArquivo(listaProcessada);
         logger.info("Dados salvos com sucesso. Total de registros: {}", listaProcessada.size());
 
-        // Retornar resposta de sucesso
         ImportacaoResponseDTO resposta = new ImportacaoResponseDTO("sucesso", listaProcessada.size());
         return ResponseEntity.ok(resposta);
     }
