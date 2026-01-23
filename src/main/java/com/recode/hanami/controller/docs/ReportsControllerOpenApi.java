@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -105,8 +106,16 @@ public interface ReportsControllerOpenApi {
 
     @Operation(
             summary = "Resumo financeiro das vendas",
-            description = "Retorna um resumo detalhado das vendas com métricas de transações, " +
-                    "formas de pagamento e canais de venda mais e menos utilizados."
+            description = """
+                    Retorna um resumo detalhado das vendas com métricas de transações,
+                    formas de pagamento e canais de venda mais e menos utilizados.
+                    
+                    **Filtros disponíveis:**
+                    - `start_date` (opcional) - Data inicial do período no formato YYYY-MM-DD
+                    - `end_date` (opcional) - Data final do período no formato YYYY-MM-DD
+                    
+                    Quando nenhum filtro é aplicado, retorna dados de todas as vendas.
+                    """
     )
     @ApiResponses(value = {
             @ApiResponse(
@@ -127,7 +136,30 @@ public interface ReportsControllerOpenApi {
                     )
             )
     })
-    ResponseEntity<Map<String, Object>> resumoFinanceiro();
+    ResponseEntity<Map<String, Object>> resumoFinanceiro(
+            @Parameter(
+                    description = """
+                            Data inicial do período para filtrar as vendas (formato: YYYY-MM-DD).
+                            
+                            **Exemplo:** `2024-01-01`
+                            
+                            Deve ser usado em conjunto com `end_date`.
+                            """,
+                    example = "2024-01-01"
+            )
+            LocalDate startDate,
+            @Parameter(
+                    description = """
+                            Data final do período para filtrar as vendas (formato: YYYY-MM-DD).
+                            
+                            **Exemplo:** `2024-12-31`
+                            
+                            Deve ser usado em conjunto com `start_date`.
+                            """,
+                    example = "2024-12-31"
+            )
+            LocalDate endDate
+    );
 
     @Operation(
             summary = "Desempenho por região",

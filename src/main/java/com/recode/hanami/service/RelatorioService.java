@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -130,8 +131,19 @@ public class RelatorioService {
     }
 
     public Map<String, Object> gerarResumoVendasMap() {
-        logger.debug("Gerando resumo de vendas");
-        List<Venda> vendas = vendaRepository.findAll();
+        return gerarResumoVendasMap(null, null);
+    }
+
+    public Map<String, Object> gerarResumoVendasMap(LocalDate startDate, LocalDate endDate) {
+        logger.debug("Gerando resumo de vendas - Período: {} a {}", startDate, endDate);
+
+        List<Venda> vendas;
+        if (startDate != null && endDate != null) {
+            vendas = vendaRepository.findByDataVendaBetween(startDate, endDate);
+            logger.info("Filtrando vendas por período: {} transações encontradas", vendas.size());
+        } else {
+            vendas = vendaRepository.findAll();
+        }
 
         Integer numeroTotalVendas = calculadoraService.calcularNumeroTransacoes(vendas);
         Double valorMedioPorTransacao = calculadoraService.calcularMediaPorTransacao(vendas);

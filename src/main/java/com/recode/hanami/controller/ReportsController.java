@@ -13,12 +13,14 @@ import com.recode.hanami.validation.FormatoRelatorioValidator;
 import com.recode.hanami.validation.SortByValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -70,9 +72,11 @@ public class ReportsController implements ReportsControllerOpenApi {
 
     @GetMapping("/sales-summary")
     @Override
-    public ResponseEntity<Map<String, Object>> resumoFinanceiro() {
-        logger.debug("Solicitação de resumo de vendas");
-        Map<String, Object> resumo = relatorioService.gerarResumoVendasMap();
+    public ResponseEntity<Map<String, Object>> resumoFinanceiro(
+            @RequestParam(value = "start_date", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+            @RequestParam(value = "end_date", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
+        logger.debug("Solicitação de resumo de vendas - Período: {} a {}", startDate, endDate);
+        Map<String, Object> resumo = relatorioService.gerarResumoVendasMap(startDate, endDate);
         logger.info("Resumo de vendas gerado: {} transações", resumo.get("numero_total_vendas"));
         return ResponseEntity.ok(resumo);
     }
