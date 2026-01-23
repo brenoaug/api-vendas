@@ -5,10 +5,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.time.LocalDateTime;
 
-/**
- * DTO para respostas de erro padronizadas da API.
- * Utilizado pelo GlobalExceptionHandler para retornar erros consistentes.
- */
 @Schema(description = "Resposta de erro padrão da API")
 public record ErrorResponseDTO(
 
@@ -22,9 +18,6 @@ public record ErrorResponseDTO(
         @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
         LocalDateTime timestamp
 ) {
-    /**
-     * Construtor de conveniência que define o timestamp automaticamente.
-     */
     public ErrorResponseDTO(String status, String mensagem) {
         this(status, mensagem, LocalDateTime.now());
     }
