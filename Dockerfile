@@ -7,6 +7,6 @@ RUN mvn clean package -DskipTests
 
 FROM eclipse-temurin:21-jre
 WORKDIR /app
-COPY --from=build ./target/hanami-0.0.1-SNAPSHOT.jar /app
+COPY --from=build app/target/hanami-0.0.1-SNAPSHOT.jar .
 EXPOSE 8080
 CMD ["java", "-jar", "hanami-0.0.1-SNAPSHOT.jar"]
