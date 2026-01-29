@@ -68,7 +68,6 @@ CSV de vendas costuma virar análise manual. Isso dá retrabalho e dá erro. O H
 * [Upload de Arquivos CSV](readme/upload-csv.md) - Especificação do upload e formato de dados
 * [Relatórios e Análises](readme/relatorios-e-analises.md) - Endpoints de geração de relatórios
 * [Modelos de Dados](readme/modelos.md) - DTOs e estruturas de resposta da API
-* [Swagger UI](http://localhost:8080/swagger-ui.html) - Documentação interativa (requer app rodando)
 
 ### Arquitetura e stack
 
