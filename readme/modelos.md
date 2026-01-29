@@ -1,6 +1,3 @@
----
-description: Modelos de dados (DTOs) utilizados pela API
----
 
 # Modelos de Dados
 

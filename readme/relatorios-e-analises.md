@@ -1,6 +1,3 @@
----
-description: Endpoints para geração de relatórios e análises de vendas
----
 
 # Relatórios e Análises
 

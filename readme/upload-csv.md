@@ -1,6 +1,3 @@
----
-description: Endpoints para processamento e importação de dados de vendas via CSV
----
 
 # Upload de Arquivos CSV
 

@@ -1,6 +1,3 @@
----
-description: Guia detalhado para rodar o Hanami via Docker Compose.
----
 
 # Executando com Docker
 
