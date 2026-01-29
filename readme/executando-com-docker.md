@@ -22,18 +22,14 @@ docker compose version
 
 ### Subindo a aplicação
 
-{% stepper %}
-{% step %}
-### 1) Clonar o repositório
+#### 1) Clonar o repositório
 
 ```bash
 git clone https://github.com/brenoaug/hanami-backend
 cd hanami-backend
 ```
-{% endstep %}
 
-{% step %}
-### 2) (Opcional) Criar `.env`
+#### 2) (Opcional) Criar `.env`
 
 Use apenas se quiser sobrescrever os defaults do `docker-compose.yml`.
 
@@ -44,13 +40,9 @@ MYSQL_USER=hanami_user
 MYSQL_PASSWORD=hanami_password
 ```
 
-{% hint style="warning" %}
-Não commite `.env`.
-{% endhint %}
-{% endstep %}
+> **⚠️ Aviso:** Não commite `.env`.
 
-{% step %}
-### 3) Subir containers
+#### 3) Subir containers
 
 ```bash
 docker compose up -d --build
@@ -61,10 +53,8 @@ O que acontece:
 * Sobe o MySQL (`hanami-db`).
 * Constrói e sobe a API (`hanami`).
 * Cria rede e volume (`mysql_data`).
-{% endstep %}
 
-{% step %}
-### 4) Verificar saúde
+#### 4) Verificar saúde
 
 ```bash
 docker compose ps
@@ -74,10 +64,8 @@ Você deve ver:
 
 * `hanami-db` como `healthy`.
 * `hanami` como `running`.
-{% endstep %}
 
-{% step %}
-### 5) Ver logs
+#### 5) Ver logs
 
 ```bash
 # Logs da API
@@ -86,8 +74,6 @@ docker compose logs -f hanami
 # Logs do MySQL
 docker compose logs -f hanami-db
 ```
-{% endstep %}
-{% endstepper %}
 
 ### URLs importantes
 
@@ -123,9 +109,7 @@ docker compose up -d --build
 docker compose down -v
 ```
 
-{% hint style="danger" %}
-`down -v` remove o volume `mysql_data`. Você perde o banco.
-{% endhint %}
+> **⚠️ Perigo:** `down -v` remove o volume `mysql_data`. Você perde o banco.
 
 ### Portas
 
