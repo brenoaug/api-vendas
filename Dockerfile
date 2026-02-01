@@ -9,4 +9,4 @@ FROM eclipse-temurin:21-jre
 WORKDIR /app
 COPY --from=build app/target/hanami-0.0.1-SNAPSHOT.jar .
 EXPOSE 8080
-CMD ["java", "-jar", "hanami-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "-Dspring.profiles.active=prod", "hanami-0.0.1-SNAPSHOT.jar"]
