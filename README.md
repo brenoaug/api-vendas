@@ -409,12 +409,8 @@ Os logs da aplicação são configurados para facilitar debugging e monitorament
 2026-01-05 14:30:26 [http-nio-8080-exec-1] DEBUG c.r.h.c.CsvController - Arquivo convertido com sucesso
 ```
 
-### Contato
+### Créditos
 
 Projeto desenvolvido por **Breno Augusto** como parte do portfólio técnico em parceria com a **Recode**.
 
-### Licença
-
 Este projeto está licenciado sob a Licença MIT. Veja o arquivo [LICENSE](LICENSE).
-
-Este projeto foi desenvolvido para fins educacionais e de demonstração de habilidades técnicas.
