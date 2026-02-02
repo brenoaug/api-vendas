@@ -19,15 +19,23 @@ cd hanami-backend
 
 #### 2) (Opcional) Customizar variáveis do MySQL
 
-Você pode rodar sem `.env`. O `docker-compose.yml` tem valores padrão.
+O `docker-compose.yml` possui valores padrão configurados. Você **não precisa** criar um arquivo `.env` para rodar a aplicação.
 
-> **💡 Dica:** Crie um `.env` **somente** se quiser mudar usuário, senha, banco ou root password. Não commite esse arquivo.
+**Valores padrão do docker-compose:**
+- **MYSQL_ROOT_PASSWORD:** `root_password`
+- **MYSQL_DATABASE:** `hanami_db`
+- **MYSQL_USER:** `hanami_user`
+- **MYSQL_PASSWORD:** `hanami_password`
+- **Porta MySQL no host:** `3307` (a porta interna do container permanece `3306`)
 
+> **💡 Dica:** Crie um arquivo `.env` **somente** se quiser personalizar esses valores. Não commite esse arquivo.
+
+**Exemplo de arquivo `.env` (opcional):**
 ```env
-MYSQL_ROOT_PASSWORD=root_password
+MYSQL_ROOT_PASSWORD=sua_senha_root
 MYSQL_DATABASE=hanami_db
-MYSQL_USER=hanami_user
-MYSQL_PASSWORD=hanami_password
+MYSQL_USER=seu_usuario
+MYSQL_PASSWORD=sua_senha
 ```
 
 #### 3) Subir a stack
